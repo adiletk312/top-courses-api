@@ -46,7 +46,6 @@
       true,
       120
     ],
-    "no-trailing-whitespace": false,
     "quotemark": [
       true,
       "single"
@@ -55,7 +54,6 @@
       true,
       "always"
     ],
-    "trailing-comma": false,
     "indent": [
       true,
       "spaces",
@@ -65,6 +63,19 @@
       "exclude": [
         "./src/**/*.d.ts"
       ]
-    }
+    },
+    "whitespace": [
+      true,
+      "check-module",
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-preblock",
+      "check-type"
+    ],
+    "eofline": true,
+    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+    "no-trailing-whitespace": true
   }
 }
