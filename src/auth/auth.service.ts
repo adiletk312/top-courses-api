@@ -6,16 +6,19 @@ import { UserModel } from './user.model';
 import { genSalt, hash, compare } from 'bcryptjs';
 import { USER_NOT_FOUND_ERROR, WRONG_PASSWORD_ERROR } from './auth.constants';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(UserModel) private readonly userModel: ModelType<UserModel>,
     private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) { }
 
   async createUser(dto: AuthDto) {
-    const salt = await genSalt(10);
+    const envSalt = this.configService.get('SALT');
+    const salt = await genSalt(Number(envSalt));
     const newUser = new this.userModel({
       email: dto.login,
       passwordHash: await hash(dto.password, salt),
