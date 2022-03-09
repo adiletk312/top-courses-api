@@ -9,14 +9,13 @@ import { ReviewService } from './review.service';
   imports: [
     TypegooseModule.forFeature([
       {
-        typegooseClass: ReviewModule,
+        typegooseClass: ReviewModel,
         schemaOptions: {
           collection: 'Review',
         },
       },
-      ReviewModel
     ]),
   ],
   providers: [ReviewService],
 })
-export class ReviewModule {}
+export class ReviewModule { }

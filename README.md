@@ -9,6 +9,18 @@
 
 API for online learning platform and courses
 
+### .env file
+```
+# Inside .env file...
+
+# Database Configurations
+MONGO_LOGIN=
+MONGO_PASSWORD=
+MONGO_HOST=localhost
+MONGO_PORT=27017
+MONGO_AUTHDATABASE=
+```
+
 ## Installation
 
 ```bash
