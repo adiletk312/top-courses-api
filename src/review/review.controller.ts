@@ -36,6 +36,7 @@ export class ReviewController {
     }
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Get('byProduct/:productId')
   async byProduct(@Param('productId') productId: string, @UserEmail() email: string) {
     return this.reviewService.findByProductId(productId);
