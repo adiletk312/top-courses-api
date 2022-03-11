@@ -22,6 +22,7 @@ import { ReviewService } from './review.service';
 export class ReviewController {
   constructor(private readonly reviewService: ReviewService) { }
 
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   @Post('create')
   async create(@Body() dto: CreateReviewDto) {
@@ -37,7 +38,6 @@ export class ReviewController {
     }
   }
 
-  // @UseGuards(JwtAuthGuard)
   @Get('byProduct/:productId')
   async byProduct(@Param('productId', IdValidationPipe) productId: string, @UserEmail() email: string) {
     return this.reviewService.findByProductId(productId);

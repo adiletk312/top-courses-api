@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypegooseModule } from 'nestjs-typegoose';
+import { ReviewModule } from 'src/review/review.module';
 import { ProductController } from './product.controller';
 import { ProductModel } from './product.model';
 import { ProductService } from './product.service';
+import { ProductAlterController } from './product-alter.controller';
 
 @Module({
-  controllers: [ProductController],
+  controllers: [ProductController, ProductAlterController],
   imports: [
     TypegooseModule.forFeature([
       {
@@ -15,6 +17,7 @@ import { ProductService } from './product.service';
         },
       },
     ]),
+    ReviewModule,
   ],
   providers: [ProductService],
 })

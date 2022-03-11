@@ -2,13 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { ModelType } from '@typegoose/typegoose/lib/types';
 import { InjectModel } from 'nestjs-typegoose';
 import { ReviewModel } from 'src/review/review.model';
+import { ReviewService } from 'src/review/review.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { FindProductDto } from './dto/find-product.dto';
 import { ProductModel } from './product.model';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel(ProductModel) private readonly productModel: ModelType<ProductModel>) { }
+  constructor(
+    @InjectModel(ProductModel) private readonly productModel: ModelType<ProductModel>,
+    private readonly reviewService: ReviewService,
+  ) {}
 
   async create(dto: CreateProductDto) {
     return this.productModel.create(dto);
@@ -66,5 +70,12 @@ export class ProductService {
         },
       },
     ]).exec() as Promise<(ProductModel & { review: ReviewModel[], reviewCount: number, reviewAvg: number })[]>;
+  }
+
+  async alterFindProductWithReviews(id: string) {
+    return {
+      product: await this.findById(id),
+      reviews: await this.reviewService.findByProductId(id),
+    };
   }
 }
