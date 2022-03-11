@@ -1,5 +1,14 @@
 version: '3'
 services:
+  courses.api:
+    image: courses-api:latest
+    container_name: courses-api
+    restart: always
+    ports:
+      - 5000:3000
+    volumes:
+      - ./.env:/opt/app/.env
+
   mongo:
     image: mongo
     container_name: mongo
